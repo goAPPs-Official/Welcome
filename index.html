@@ -298,17 +298,40 @@
         }
         @keyframes onlineBlink{0%,100%{opacity:1}50%{opacity:.4}}
 
-        /* ── PWA INSTALL BANNER ── */
+        /* ── PWA INSTALL BANNER — floats in from TOP ── */
         #pwa-banner{
-            position:absolute;bottom:72px;left:10px;right:10px;
-            background:var(--card);border:1px solid var(--primary);
+            position:absolute;
+            /* sits just below the header (~68px) */
+            top:68px;
+            left:10px;right:10px;
+            background:var(--card);
+            border:1px solid var(--primary);
             border-radius:14px;padding:11px 14px;
             display:none;align-items:center;gap:11px;
-            z-index:400;box-shadow:0 6px 22px rgba(0,0,0,.5);
-            animation:slideUp .4s ease
+            z-index:450;
+            box-shadow:0 8px 28px rgba(0,0,0,.55),
+                       0 0 0 1px rgba(0,210,141,.15);
+            /* start above viewport, slide down into place */
+            transform:translateY(-120%);
+            opacity:0;
+            transition:transform .48s cubic-bezier(.34,1.26,.64,1),
+                       opacity .35s ease;
         }
-        @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
-        #pwa-banner.show{display:flex}
+        /* green accent left bar */
+        #pwa-banner::before{
+            content:'';position:absolute;left:0;top:10px;bottom:10px;
+            width:3px;background:var(--primary);border-radius:2px;
+        }
+        #pwa-banner.show{
+            display:flex;
+            transform:translateY(0);
+            opacity:1;
+        }
+        /* dismiss: slide back up */
+        #pwa-banner.hide{
+            transform:translateY(-120%);
+            opacity:0;
+        }
         .pwa-icon{width:36px;height:36px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
         .pwa-info{flex:1}
         .pwa-info b{font-size:.76rem;display:block;color:var(--text)}
@@ -629,19 +652,62 @@ self.addEventListener('fetch',e=>{
     }
 })();
 
-// ══ PWA INSTALL BANNER ══
+// ══ PWA INSTALL BANNER — slides in from top with notification tone ══
 let deferredInstall=null;
+
+/* notification chime — two-tone "ding-dong" */
+function playPWATone(){
+    try{
+        const ctx=new(window.AudioContext||window.webkitAudioContext)();
+        // tone 1: soft high ding
+        const notes=[[880,0,.18],[659.25,.22,.24]];
+        notes.forEach(([freq,delay,dur])=>{
+            const osc=ctx.createOscillator();
+            const gn=ctx.createGain();
+            osc.connect(gn);gn.connect(ctx.destination);
+            osc.type='sine';
+            osc.frequency.setValueAtTime(freq,ctx.currentTime+delay);
+            gn.gain.setValueAtTime(0,ctx.currentTime+delay);
+            gn.gain.linearRampToValueAtTime(.28,ctx.currentTime+delay+.015);
+            gn.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+delay+dur);
+            osc.start(ctx.currentTime+delay);
+            osc.stop(ctx.currentTime+delay+dur+.02);
+        });
+        // subtle double-tap haptic
+        if(navigator.vibrate) navigator.vibrate([30,60,30]);
+    }catch(e){}
+}
+
+function showPWABanner(){
+    const b=document.getElementById('pwa-banner');
+    b.style.display='flex';          // make it flex first so transition fires
+    // force reflow so the transition plays from the hidden state
+    b.getBoundingClientRect();
+    requestAnimationFrame(()=>{
+        b.classList.remove('hide');
+        b.classList.add('show');
+        playPWATone();
+    });
+}
+
+function dismissPWA(){
+    const b=document.getElementById('pwa-banner');
+    b.classList.remove('show');
+    b.classList.add('hide');
+    // hide from layout after slide-out completes
+    setTimeout(()=>{ b.style.display='none'; b.classList.remove('hide'); },500);
+}
+
 window.addEventListener('beforeinstallprompt',e=>{
     e.preventDefault();
     deferredInstall=e;
-    setTimeout(()=>document.getElementById('pwa-banner').classList.add('show'),3500);
+    setTimeout(showPWABanner, 3500);
 });
 document.getElementById('pwa-install-btn').addEventListener('click',()=>{
     if(!deferredInstall) return;
     deferredInstall.prompt();
     deferredInstall.userChoice.then(()=>{deferredInstall=null;dismissPWA();});
 });
-function dismissPWA(){document.getElementById('pwa-banner').classList.remove('show');}
 window.addEventListener('appinstalled',()=>{dismissPWA();triggerPushNotify('📲 goAPPs Installed','App added to your home screen.',true);});
 
 // ══════════════════════════════════════════════
