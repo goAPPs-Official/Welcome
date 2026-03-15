@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🚀goAPPs|DigitalSolution</title>
-
-    <!-- ══ PWA META ══ -->
     <meta name="description" content="goAPPs Nigeria — your all-in-one digital wallet and services platform">
     <meta name="theme-color" content="#00d28d">
     <meta name="mobile-web-app-capable" content="yes">
@@ -13,22 +11,22 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="goAPPs">
     <link rel="manifest" href="#" id="pwa-manifest-link">
-    <!-- inline manifest injected by JS below -->
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #081f14; --bg2: #0a2a1a; --card: #0d3d26; --card2: #0f4a2e;
-            --text: #f0faf5; --text2: #a8c5b5; --primary: #00d28d;
-            --primary-glow: rgba(0,210,141,0.25); --primary-dim: rgba(0,210,141,0.12);
-            --input-bg: #0d4d36; --border: rgba(255,255,255,0.07);
-            --success: #10b981; --danger: #ff4d4d; --white: #ffffff; --gray: #6b8f7a;
-            --overlay: rgba(0,0,0,0.75); --header-bg: #081f14; --nav-bg: #0a2a1a;
-            --shadow: rgba(0,0,0,0.5); --switch-track: rgba(255,255,255,0.15);
-            --balance-bg: linear-gradient(135deg,#00d28d 0%,#00a36e 100%);
-            --balance-text: #ffffff; --balance-sub: rgba(255,255,255,0.75);
-            --balance-btn: rgba(255,255,255,0.2); --balance-btn-text: #ffffff;
-            --balance-plus-bg: #ffffff; --balance-plus-color: #00a36e;
+            --bg:#081f14;--bg2:#0a2a1a;--card:#0d3d26;--card2:#0f4a2e;
+            --text:#f0faf5;--text2:#a8c5b5;--primary:#00d28d;
+            --primary-glow:rgba(0,210,141,0.25);--primary-dim:rgba(0,210,141,0.12);
+            --input-bg:#0d4d36;--border:rgba(255,255,255,0.07);
+            --success:#10b981;--danger:#ff4d4d;--white:#ffffff;--gray:#6b8f7a;
+            --overlay:rgba(0,0,0,0.75);--header-bg:#081f14;--nav-bg:#0a2a1a;
+            --shadow:rgba(0,0,0,0.5);--switch-track:rgba(255,255,255,0.15);
+            --balance-text:#e8e8e8;
+            --balance-sub:rgba(180,180,180,0.85);
+            --balance-btn:rgba(255,255,255,0.15);
+            --balance-btn-text:#fff;
+            --balance-plus-bg:#c0c0c0;
+            --balance-plus-color:#1a1a1a;
         }
         .light-mode {
             --bg:#f0faf6;--bg2:#e6f5ee;--card:#ffffff;--card2:#f7fdf9;
@@ -38,10 +36,14 @@
             --danger:#dc2626;--gray:#6b7280;--overlay:rgba(0,0,0,0.35);
             --header-bg:#ffffff;--nav-bg:#ffffff;--shadow:rgba(0,0,0,0.12);
             --switch-track:#d1d5db;
-            --balance-bg:linear-gradient(135deg,#ffffff 0%,#edfaf4 100%);
-            --balance-text:#064e35;--balance-sub:#2d7a57;--balance-btn:#059669;
-            --balance-btn-text:#ffffff;--balance-plus-bg:#059669;--balance-plus-color:#ffffff;
+            --balance-text:#1a1a1a;
+            --balance-sub:rgba(60,60,60,0.8);
+            --balance-btn:rgba(0,0,0,0.12);
+            --balance-btn-text:#1a1a1a;
+            --balance-plus-bg:#888;
+            --balance-plus-color:#fff;
         }
+
         *,*::before,*::after{transition:background-color .35s ease,background .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease}
         .card-inner,.card-inner *,.insight-track,.insight-item img,.spinner,.mini-spinner,.dot,.slider-arrow,nav a,#push-notification{transition:none!important}
         .card-container.is-frozen{transition:filter .3s ease!important}
@@ -51,46 +53,52 @@
         #side-menu{transition:left .4s cubic-bezier(.4,0,.2,1)!important}
         .card-inner{transition:transform .6s ease!important}
 
-        body{margin:0;font-family:'Inter',sans-serif;background-color:#111;color:var(--text);overflow:hidden}
+        html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
+        body{font-family:'Inter',sans-serif;background:#111;color:var(--text);display:flex;align-items:center;justify-content:center}
 
-        .phone-container{background:var(--bg)}
-        header{background:var(--header-bg);border-bottom:1px solid var(--border)}
-        nav{background:var(--nav-bg)!important;border-top:1px solid var(--border)!important}
-        nav a{color:var(--text2)!important}
+        /* ── FULL SCALE PHONE ── */
+        .phone-container{
+            width:100vw;height:100vh;
+            background:var(--bg);
+            position:relative;
+            display:flex;flex-direction:column;
+            overflow:hidden;
+            border-radius:0;
+            border:none;
+            box-shadow:none;
+        }
+        @media(min-width:480px){
+            .phone-container{
+                width:390px;height:844px;
+                border-radius:40px;
+                border:8px solid #1a1a1a;
+                box-shadow:0 25px 60px rgba(0,0,0,.7);
+            }
+            body{background:#111;}
+        }
+
+        header{background:var(--header-bg);border-bottom:1px solid var(--border);padding:20px 20px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+        nav{background:var(--nav-bg)!important;border-top:1px solid var(--border)!important;display:flex;justify-content:space-around;padding:12px 0 max(20px,env(safe-area-inset-bottom));position:relative;bottom:0;width:100%;flex-shrink:0;box-sizing:border-box}
+        nav a{text-decoration:none;color:var(--text2)!important;opacity:.55;font-size:.65rem;text-align:center}
         nav a.active{color:var(--primary)!important;opacity:1!important}
-        .service-item{background:var(--card);border-color:var(--border);color:var(--text)}
-        .section-title{color:var(--text)}
-        #local-history-feed{background:var(--card)!important}
-        .history-item{border-bottom-color:var(--border)}
-        .connect-input{background:var(--input-bg);color:var(--text);border-color:var(--border)}
-        .connect-input::placeholder{color:var(--text2)}
-        #side-menu{border-right-color:var(--border)}
-        .menu-item{border-bottom-color:var(--border);color:var(--text)}
-        .slider{background-color:var(--switch-track)}
-        .light-mode .phone-container{box-shadow:0 25px 50px rgba(0,0,0,.18)}
-        .light-mode .balance-card{box-shadow:0 10px 24px rgba(5,150,105,.25)!important}
-        .light-mode .service-item{box-shadow:0 1px 4px rgba(0,0,0,.06)}
-        .light-mode header{box-shadow:0 1px 8px rgba(0,0,0,.06)}
-        .light-mode nav{box-shadow:0 -1px 8px rgba(0,0,0,.06)!important}
-        .light-mode #push-notification{background:var(--card)}
-        .light-mode .connect-input{border-color:#c8e8d8}
-        .light-mode .card-front{background:linear-gradient(135deg,#1a2e22 0%,#0d5038 100%)}
-        .light-mode #side-menu{background:var(--bg);border-right:1px solid var(--border)}
-        body:not(.light-mode) .service-item:hover{background:var(--card2)}
 
         .theme-ripple{position:fixed;border-radius:50%;background:rgba(255,255,255,.12);pointer-events:none;z-index:9999;transform:scale(0);animation:ripple-expand .5s ease-out forwards}
         @keyframes ripple-expand{to{transform:scale(40);opacity:0}}
 
-        /* ── BALANCE CARD ── */
-        .balance-card{background:var(--balance-bg)!important;border-radius:22px;padding:20px;position:relative;box-shadow:0 10px 28px var(--primary-glow);border:1px solid var(--border);margin-bottom:36px}
+        /* ── METALLIC BALANCE CARD ── */
+        .balance-card{
+            background:linear-gradient(135deg,#6e6e6e 0%,#c0c0c0 30%,#e8e8e8 50%,#a0a0a0 70%,#707070 100%)!important;
+            border-radius:22px;padding:20px;position:relative;
+            box-shadow:0 10px 28px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(0,0,0,.2);
+            border:1px solid rgba(255,255,255,.3);
+            margin-bottom:36px;
+        }
         .balance-card .balance-label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--balance-sub)}
-        .balance-card #balance-display{font-size:1.85rem;font-weight:800;color:var(--balance-text);margin:4px 0 0}
+        .balance-card #balance-display{font-size:1.85rem;font-weight:800;color:var(--balance-text);margin:4px 0 0;text-shadow:0 1px 2px rgba(255,255,255,.3)}
         .balance-card .balance-eye{cursor:pointer;font-size:1.1rem;opacity:.7}
         .balance-card .balance-bonus{font-size:.75rem;color:var(--balance-sub);margin-top:4px}
-        .balance-card .send-btn{width:100%;margin-top:14px;padding:12px;border-radius:12px;border:none;background:var(--balance-btn);color:var(--balance-btn-text);font-weight:800;font-size:.85rem;cursor:pointer;letter-spacing:.3px}
-        .light-mode .balance-card .send-btn{box-shadow:0 3px 10px rgba(5,150,105,.25)}
-        .balance-card .plus-btn{width:44px;height:44px;background:var(--balance-plus-bg);color:var(--balance-plus-color);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);box-shadow:0 5px 18px rgba(0,0,0,.18);cursor:pointer;z-index:10;border:3px solid var(--bg)}
-        .light-mode .balance-card{border:1.5px solid #c8e8d8}
+        .balance-card .send-btn{width:100%;margin-top:14px;padding:12px;border-radius:12px;border:none;background:rgba(0,0,0,.18);color:#fff;font-weight:800;font-size:.85rem;cursor:pointer;letter-spacing:.3px;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+        .balance-card .plus-btn{width:44px;height:44px;background:var(--balance-plus-bg);color:var(--balance-plus-color);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);box-shadow:0 5px 18px rgba(0,0,0,.3);cursor:pointer;z-index:10;border:3px solid var(--bg)}
 
         /* ── MINI FEED ── */
         .mini-feed{background:var(--card);border-radius:18px;padding:14px 16px;margin-bottom:20px;border:1px solid var(--border)}
@@ -117,26 +125,23 @@
         .spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;margin:20px auto;animation:spin 1s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
 
-        /* ── PHONE ── */
-        .phone-container{width:375px;height:750px;background:var(--bg);margin:20px auto;border-radius:40px;overflow:hidden;position:relative;border:8px solid #1a1a1a;display:flex;flex-direction:column;box-shadow:0 25px 50px rgba(0,0,0,.5)}
-        @media(max-width:400px){.phone-container{width:100vw;height:100vh;margin:0;border:none;border-radius:0}}
-
-        header{padding:25px 20px;display:flex;justify-content:space-between;align-items:center}
         .menu-icon{width:22px;height:16px;border-top:2px solid var(--primary);border-bottom:2px solid var(--primary);position:relative;cursor:pointer}
         .menu-icon::after{content:'';position:absolute;top:5px;width:100%;height:2px;background:var(--primary)}
 
         /* ── SIDE MENU ── */
         #menu-overlay{position:absolute;inset:0;background:var(--overlay);backdrop-filter:blur(3px);z-index:100;opacity:0;pointer-events:none;transition:.3s}
-        #side-menu{position:absolute;left:-280px;top:0;width:280px;height:100%;background:var(--bg);z-index:101;display:flex;flex-direction:column;padding:40px 20px;border-right:1px solid rgba(255,255,255,.1);box-sizing:border-box}
+        #side-menu{position:absolute;left:-300px;top:0;width:300px;height:100%;background:var(--bg);z-index:101;display:flex;flex-direction:column;padding:0 20px 20px;border-right:1px solid rgba(255,255,255,.1);box-sizing:border-box;overflow-y:auto;scrollbar-width:none}
+        #side-menu::-webkit-scrollbar{display:none}
         .menu-open #side-menu{left:0}
         .menu-open #menu-overlay{opacity:1;pointer-events:auto}
         .menu-item{display:flex;align-items:center;gap:15px;padding:12px 0;color:var(--text);text-decoration:none;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer}
+        .menu-item:hover{color:var(--primary)}
 
         /* ── MODAL BASE ── */
         .modal{position:absolute;inset:0;background:var(--bg);z-index:200;display:none;flex-direction:column;padding:30px;overflow-y:auto;box-sizing:border-box}
         #topup-modal{position:absolute;inset:0;width:100%;height:100%;padding:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;box-sizing:border-box;align-items:stretch;justify-content:flex-start}
         #topup-modal::-webkit-scrollbar{display:none}
-        #topup-modal .topup-inner{width:100%;max-width:375px;margin:0 auto;padding:28px 20px 80px;box-sizing:border-box;text-align:center}
+        #topup-modal .topup-inner{width:100%;max-width:390px;margin:0 auto;padding:28px 20px 100px;box-sizing:border-box;text-align:center}
         #topup-modal .bank-details-box{background:rgba(0,210,141,.1);padding:14px;border-radius:15px;margin-bottom:18px;border:1px dashed var(--primary);text-align:left;width:100%;box-sizing:border-box}
         #topup-modal .bank-details-box .bank-row{font-size:.82rem;line-height:1.7;word-break:break-word}
         #topup-modal .connect-input,#topup-modal select{width:100%;padding:13px 12px;border-radius:10px;background:var(--input-bg);border:1px solid rgba(255,255,255,.12);color:var(--text);font-size:.9rem;margin-top:6px;box-sizing:border-box;outline:none;-webkit-appearance:none;appearance:none}
@@ -165,184 +170,141 @@
         .card-number{font-family:'Courier New',monospace;font-size:1.1rem;letter-spacing:2px;margin-bottom:15px}
         .card-holder{text-transform:uppercase;font-size:.7rem;opacity:.8}
         .magnetic-strip{width:100%;height:35px;background:#000;position:absolute;top:25px;left:0}
-        .cvv-section{background:#fff;color:#333;width:50px;padding:4px;text-align:center;border-radius:4px;font-weight:800;margin-left:auto;filter:blur(5px)}
+        .cvv-section{background:#fff;color:#333;width:50px;padding:4px;text-align:center;border-radius:4px;font-weight:800;filter:blur(5px)}
         .cvv-section.unblurred{filter:blur(0)}
         .card-container.is-frozen{filter:grayscale(1) opacity(.6);pointer-events:none}
         .frozen-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--danger);color:white;padding:5px 15px;border-radius:20px;font-weight:800;font-size:.7rem;display:none;z-index:20}
         .is-frozen .frozen-badge{display:block}
+        .card-back-btns{display:flex;gap:8px;margin-top:10px}
+        .card-back-btn{flex:1;border:1px solid var(--primary);background:transparent;color:var(--primary);font-size:.6rem;padding:5px 6px;border-radius:6px;cursor:pointer;font-weight:700}
+        .card-back-btn.danger-btn{border-color:var(--danger);color:var(--danger)}
 
-        .main-scroll{flex:1;overflow-y:auto;padding:15px 15px 100px;scrollbar-width:none}
+        .main-scroll{flex:1;overflow-y:auto;padding:15px 15px 20px;scrollbar-width:none}
         .main-scroll::-webkit-scrollbar{display:none}
-        .section-title{font-weight:800;margin:25px 0 10px;font-size:.9rem;display:flex;justify-content:space-between;align-items:center}
-        .connect-input{width:100%;padding:12px;border-radius:10px;background:var(--input-bg);border:1px solid rgba(255,255,255,.1);color:white;font-size:.85rem;margin-top:5px;box-sizing:border-box;outline:none}
+        .section-title{font-weight:800;margin:25px 0 10px;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center;color:var(--text)}
+        .connect-input{width:100%;padding:12px;border-radius:10px;background:var(--input-bg);border:1px solid rgba(255,255,255,.1);color:var(--text);font-size:.85rem;margin-top:5px;box-sizing:border-box;outline:none}
+        .light-mode .connect-input{color:#0d2b1c}
         .btn-action{width:100%;padding:14px;border-radius:12px;border:none;font-weight:800;cursor:pointer;margin-top:10px;transition:.2s;display:flex;justify-content:center;align-items:center;gap:8px}
         .btn-loading .btn-text{display:none}
         .btn-loading .mini-spinner{display:block!important}
         .mini-spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;display:none}
         .switch{position:relative;display:inline-block;width:40px;height:20px}
         .switch input{opacity:0;width:0;height:0}
-        .slider{position:absolute;cursor:pointer;inset:0;background-color:#ccc;transition:.4s;border-radius:20px}
-        .slider:before{position:absolute;content:"";height:14px;width:14px;left:3px;bottom:3px;background-color:white;transition:.4s;border-radius:50%}
-        input:checked + .slider{background-color:var(--primary)}
-        input:checked + .slider:before{transform:translateX(20px)}
-        nav{display:flex;justify-content:space-around;padding:15px 0 25px;background:var(--card);position:absolute;bottom:0;width:100%;border-top:1px solid rgba(255,255,255,.05)}
-        nav a{text-decoration:none;color:var(--text);opacity:.5;font-size:.65rem;text-align:center}
-        nav a.active{opacity:1;color:var(--primary)}
+        .slider-sw{position:absolute;cursor:pointer;inset:0;background-color:var(--switch-track);transition:.4s;border-radius:20px}
+        .slider-sw:before{position:absolute;content:"";height:14px;width:14px;left:3px;bottom:3px;background-color:white;transition:.4s;border-radius:50%}
+        input:checked + .slider-sw{background-color:var(--primary)}
+        input:checked + .slider-sw:before{transform:translateX(20px)}
+
         .history-item{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05)}
         .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-        .service-item{background:var(--card);padding:12px;border-radius:16px;display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.05)}
+        .service-item{background:var(--card);padding:12px;border-radius:16px;display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,.05);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+        .service-item:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
         .highlight{background:var(--primary);color:#062c1e!important}
+        .highlight .service-item{background:var(--primary);color:#062c1e}
         .horizontal-list{display:flex;gap:15px;overflow-x:auto;padding:5px 0;scrollbar-width:none}
 
-        /* ── SLIDER ── */
+        /* ── SERVICE ITEM ENTRANCE ANIMATION ── */
+        @keyframes floatUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .grid .service-item-wrap{opacity:0;animation:floatUp .5s ease forwards}
+        .grid .service-item-wrap:nth-child(1){animation-delay:.05s}
+        .grid .service-item-wrap:nth-child(2){animation-delay:.1s}
+        .grid .service-item-wrap:nth-child(3){animation-delay:.15s}
+        .grid .service-item-wrap:nth-child(4){animation-delay:.2s}
+        .grid .service-item-wrap:nth-child(5){animation-delay:.25s}
+        .grid .service-item-wrap:nth-child(6){animation-delay:.3s}
+        .grid .service-item-wrap:nth-child(7){animation-delay:.35s}
+        .grid .service-item-wrap:nth-child(8){animation-delay:.4s}
+        .grid .service-item-wrap:nth-child(9){animation-delay:.45s}
+        .grid .service-item-wrap:nth-child(10){animation-delay:.5s}
+        .grid .service-item-wrap:nth-child(11){animation-delay:.55s}
+        .grid .service-item-wrap:nth-child(12){animation-delay:.6s}
+        .grid .service-item-wrap:nth-child(13){animation-delay:.65s}
+        .grid .service-item-wrap:nth-child(14){animation-delay:.7s}
+        .grid .service-item-wrap:nth-child(15){animation-delay:.75s}
+        .grid .service-item-wrap:nth-child(16){animation-delay:.8s}
+        .grid .service-item-wrap:nth-child(17){animation-delay:.85s}
+        .grid .service-item-wrap:nth-child(18){animation-delay:.9s}
+        .grid .service-item-wrap:nth-child(19){animation-delay:.95s}
+
+        /* ── HISTORY BLUR ── */
+        .history-blur-wrap{position:relative}
+        .history-blur-inner{filter:blur(4px);pointer-events:none;user-select:none}
+        .see-history-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(8,31,20,.55);border-radius:18px}
+        .see-history-btn{background:var(--primary);color:#062c1e;border:none;padding:10px 22px;border-radius:12px;font-weight:800;font-size:.82rem;cursor:pointer}
+
+        /* ── IMAGE SLIDER ── */
         .slider-wrapper{position:relative;width:100%;height:150px;border-radius:20px;overflow:hidden;margin-bottom:20px;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+        .slider-wrapper:hover .insight-item.active-slide img{transform:scale(1.16);transition:transform .6s ease!important}
+        .slider-wrapper:hover::after{content:'';position:absolute;inset:0;background:rgba(0,210,141,.07);z-index:3;pointer-events:none;border-radius:20px;transition:background .3s}
         .insight-track{display:flex;width:100%;height:100%;will-change:transform}
-        .insight-item{min-width:100%;height:100%;position:relative;flex-shrink:0;display:flex;align-items:flex-end;overflow:hidden}
-        .insight-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.04)}
+        .insight-item{min-width:100%;height:100%;position:relative;flex-shrink:0;display:flex;align-items:flex-end;overflow:hidden;background:#f5f5f0}
+        .insight-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;transform:scale(1.04);transition:transform .5s ease!important}
         .insight-item.active-slide img{transform:scale(1.12)}
-        .insight-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(4,30,18,.88) 0%,rgba(4,30,18,.3) 45%,transparent 75%),linear-gradient(to right,rgba(0,0,0,.15) 0%,transparent 60%);z-index:1}
+        .insight-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(230,245,238,.9) 0%,rgba(200,230,215,.4) 45%,transparent 75%),linear-gradient(to right,rgba(200,230,215,.2) 0%,transparent 60%);z-index:1}
         .slide-tag{position:absolute;top:12px;left:12px;z-index:3;background:var(--primary);color:#062c1e;font-size:.55rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px;padding:3px 8px;border-radius:20px}
         .image-content{position:relative;z-index:2;padding:10px 14px 14px;width:100%;box-sizing:border-box}
-        .image-content .slide-label{font-size:.7rem;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:.5px;line-height:1;margin-bottom:3px}
-        .image-content .slide-text{font-size:.9rem;font-weight:700;color:#fff;line-height:1.25;text-shadow:0 1px 4px rgba(0,0,0,.5);max-width:80%}
+        .image-content .slide-label{font-size:.7rem;font-weight:800;color:#059669;text-transform:uppercase;letter-spacing:.5px;line-height:1;margin-bottom:3px}
+        .image-content .slide-text{font-size:.9rem;font-weight:700;color:#0d2b1c;line-height:1.25;text-shadow:0 1px 3px rgba(255,255,255,.5);max-width:80%}
         .slider-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:5;align-items:center}
-        .dot{width:5px;height:5px;background:rgba(255,255,255,.35);border-radius:50%;cursor:pointer}
-        .dot.active{background:var(--primary);width:18px;border-radius:10px}
-        .slider-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;background:rgba(0,0,0,.35);border:none;color:white;width:26px;height:26px;border-radius:50%;font-size:.7rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px)}
-        .slider-arrow:hover{background:rgba(0,210,141,.5)}
+        .dot{width:5px;height:5px;background:rgba(5,150,105,.35);border-radius:50%;cursor:pointer}
+        .dot.active{background:#059669;width:18px;border-radius:10px}
+        .slider-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;background:rgba(255,255,255,.7);border:none;color:#059669;width:26px;height:26px;border-radius:50%;font-size:.7rem;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(4px)}
+        .slider-arrow:hover{background:rgba(5,150,105,.8);color:white}
         .slider-arrow.left{left:8px}.slider-arrow.right{right:8px}
-        .insight-item .slide-skeleton{position:absolute;inset:0;background:linear-gradient(90deg,#0a3d2a 25%,#0d5038 50%,#0a3d2a 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;z-index:0}
+        .insight-item .slide-skeleton{position:absolute;inset:0;background:linear-gradient(90deg,#ddf0e8 25%,#eef8f2 50%,#ddf0e8 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;z-index:0}
         @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-        /* ══════════════════════════════════════
-           BUSINESS BUTTON — FLOATING AGENT FAB
-        ══════════════════════════════════════ */
-        #biz-fab{
-            position:absolute;
-            bottom:88px;
-            right:14px;
-            z-index:500;
-            display:flex;
-            flex-direction:column;
-            align-items:flex-end;
-            gap:8px;
-            pointer-events:none;
-            opacity:0;
-            transform:translateY(24px) scale(.85);
-            transition:opacity .45s cubic-bezier(.34,1.56,.64,1),
-                        transform .45s cubic-bezier(.34,1.56,.64,1);
-        }
-        #biz-fab.visible{
-            opacity:1;
-            transform:translateY(0) scale(1);
-            pointer-events:auto;
-        }
-
-        /* tooltip label */
-        .biz-label{
-            background:var(--primary);color:#062c1e;
-            font-size:.62rem;font-weight:800;
-            padding:5px 11px;border-radius:20px;
-            white-space:nowrap;
-            box-shadow:0 4px 14px rgba(0,210,141,.4);
-            animation:labelPop .35s ease .55s both;
-        }
+        /* ── BUSINESS FAB ── */
+        #biz-fab{position:absolute;bottom:88px;right:14px;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;opacity:0;transform:translateY(24px) scale(.85);transition:opacity .45s cubic-bezier(.34,1.56,.64,1),transform .45s cubic-bezier(.34,1.56,.64,1)}
+        #biz-fab.visible{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+        .biz-label{background:var(--primary);color:#062c1e;font-size:.62rem;font-weight:800;padding:5px 11px;border-radius:20px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,210,141,.4);animation:labelPop .35s ease .55s both}
         @keyframes labelPop{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
-
-        /* avatar button */
-        .biz-btn{
-            width:56px;height:56px;border-radius:50%;
-            background:linear-gradient(135deg,#00d28d,#4b44e0);
-            border:3px solid rgba(255,255,255,.25);
-            box-shadow:0 6px 22px rgba(0,210,141,.45),
-                       0 2px 8px rgba(0,0,0,.4);
-            cursor:pointer;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.5rem;
-            position:relative;
-            transition:transform .18s ease,box-shadow .18s ease;
-            -webkit-tap-highlight-color:transparent;
-        }
+        .biz-btn{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#00d28d,#4b44e0);border:3px solid rgba(255,255,255,.25);box-shadow:0 6px 22px rgba(0,210,141,.45),0 2px 8px rgba(0,0,0,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;position:relative;transition:transform .18s ease,box-shadow .18s ease;-webkit-tap-highlight-color:transparent}
         .biz-btn:hover{transform:scale(1.08);box-shadow:0 10px 28px rgba(0,210,141,.6)}
         .biz-btn:active{transform:scale(.95)}
-
-        /* pulse ring */
-        .biz-btn::before{
-            content:'';
-            position:absolute;
-            inset:-5px;
-            border-radius:50%;
-            border:2px solid rgba(0,210,141,.5);
-            animation:bizPulse 2.2s ease-in-out infinite;
-        }
-        .biz-btn::after{
-            content:'';
-            position:absolute;
-            inset:-10px;
-            border-radius:50%;
-            border:1.5px solid rgba(0,210,141,.25);
-            animation:bizPulse 2.2s ease-in-out .5s infinite;
-        }
-        @keyframes bizPulse{
-            0%{transform:scale(1);opacity:.7}
-            60%{transform:scale(1.18);opacity:0}
-            100%{transform:scale(1.18);opacity:0}
-        }
-
-        /* online dot */
-        .biz-online{
-            position:absolute;bottom:2px;right:2px;
-            width:13px;height:13px;border-radius:50%;
-            background:#25d366;border:2px solid var(--bg);
-            animation:onlineBlink 2.5s ease-in-out infinite;
-        }
+        .biz-btn::before{content:'';position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(0,210,141,.5);animation:bizPulse 2.2s ease-in-out infinite}
+        .biz-btn::after{content:'';position:absolute;inset:-10px;border-radius:50%;border:1.5px solid rgba(0,210,141,.25);animation:bizPulse 2.2s ease-in-out .5s infinite}
+        @keyframes bizPulse{0%{transform:scale(1);opacity:.7}60%{transform:scale(1.18);opacity:0}100%{transform:scale(1.18);opacity:0}}
+        .biz-online{position:absolute;bottom:2px;right:2px;width:13px;height:13px;border-radius:50%;background:#25d366;border:2px solid var(--bg);animation:onlineBlink 2.5s ease-in-out infinite}
         @keyframes onlineBlink{0%,100%{opacity:1}50%{opacity:.4}}
 
-        /* ── PWA INSTALL BANNER — floats in from TOP ── */
-        #pwa-banner{
-            position:absolute;
-            /* sits just below the header (~68px) */
-            top:68px;
-            left:10px;right:10px;
-            background:var(--card);
-            border:1px solid var(--primary);
-            border-radius:14px;padding:11px 14px;
-            display:none;align-items:center;gap:11px;
-            z-index:450;
-            box-shadow:0 8px 28px rgba(0,0,0,.55),
-                       0 0 0 1px rgba(0,210,141,.15);
-            /* start above viewport, slide down into place */
-            transform:translateY(-120%);
-            opacity:0;
-            transition:transform .48s cubic-bezier(.34,1.26,.64,1),
-                       opacity .35s ease;
-        }
-        /* green accent left bar */
-        #pwa-banner::before{
-            content:'';position:absolute;left:0;top:10px;bottom:10px;
-            width:3px;background:var(--primary);border-radius:2px;
-        }
-        #pwa-banner.show{
-            display:flex;
-            transform:translateY(0);
-            opacity:1;
-        }
-        /* dismiss: slide back up */
-        #pwa-banner.hide{
-            transform:translateY(-120%);
-            opacity:0;
-        }
+        /* ── PWA BANNER ── */
+        #pwa-banner{position:absolute;top:68px;left:10px;right:10px;background:var(--card);border:1px solid var(--primary);border-radius:14px;padding:11px 14px;display:none;align-items:center;gap:11px;z-index:450;box-shadow:0 8px 28px rgba(0,0,0,.55);transform:translateY(-120%);opacity:0;transition:transform .48s cubic-bezier(.34,1.26,.64,1),opacity .35s ease}
+        #pwa-banner::before{content:'';position:absolute;left:0;top:10px;bottom:10px;width:3px;background:var(--primary);border-radius:2px}
+        #pwa-banner.show{display:flex;transform:translateY(0);opacity:1}
+        #pwa-banner.hide{transform:translateY(-120%);opacity:0}
         .pwa-icon{width:36px;height:36px;border-radius:10px;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
         .pwa-info{flex:1}
         .pwa-info b{font-size:.76rem;display:block;color:var(--text)}
         .pwa-info small{font-size:.62rem;color:var(--text2)}
         .pwa-install-btn{background:var(--primary);color:#062c1e;border:none;padding:7px 13px;border-radius:8px;font-size:.68rem;font-weight:800;cursor:pointer;white-space:nowrap}
         .pwa-close{background:none;border:none;color:var(--text2);font-size:1.1rem;cursor:pointer;padding:0 2px}
+
+        /* ── GENERIC OVERLAY MODAL ── */
+        .overlay-modal{display:none;position:absolute;inset:0;background:rgba(0,0,0,.75);z-index:9999;align-items:center;justify-content:center;padding:20px;box-sizing:border-box}
+        .overlay-modal.show{display:flex}
+        .overlay-card{background:var(--card);padding:24px;border-radius:20px;width:100%;max-width:320px;text-align:center;border:1px solid var(--border)}
+        .overlay-card h3{margin:0 0 8px;color:var(--text);font-size:1rem}
+        .overlay-card p{font-size:.78rem;color:var(--text2);margin:0 0 14px;line-height:1.5}
+        .overlay-input{width:100%;padding:12px;margin:6px 0;border-radius:10px;border:1px solid var(--border);background:var(--input-bg);color:var(--text);font-size:.85rem;box-sizing:border-box;outline:none}
+        .overlay-btn{width:100%;padding:13px;border-radius:12px;border:none;font-weight:800;font-size:.85rem;cursor:pointer;margin-top:8px}
+        .overlay-btn.primary{background:var(--primary);color:#062c1e}
+        .overlay-btn.secondary{background:transparent;color:var(--gray)}
+        .overlay-cancel{margin-top:10px;font-size:.78rem;color:var(--gray);cursor:pointer}
+
+        /* ── PROFILE ABSTRACT IMAGE ── */
+        .profile-avatar{width:48px;height:48px;border-radius:14px;overflow:hidden;cursor:pointer;flex-shrink:0;border:2px solid var(--primary)}
+        .profile-avatar canvas{display:block;width:100%;height:100%}
+        .profile-area{display:flex;align-items:center;gap:12px;margin-bottom:0;cursor:pointer;padding:8px 0}
+
+        /* ── SIDE MENU TOP ── */
+        .side-menu-top{padding:40px 0 10px;flex-shrink:0}
+        .side-support-btn{width:100%;padding:10px;border-radius:10px;background:var(--primary);color:#062c1e;border:none;font-weight:800;font-size:.8rem;cursor:pointer;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:6px}
     </style>
 </head>
 <body id="app-body">
 
-    <!-- ══ SPLASH ══ -->
+    <!-- SPLASH -->
     <div id="splash-screen">
         <div style="text-align:center;color:white">
             <h1 style="font-size:2.2rem;font-weight:800">goAPPs<span style="background:rgba(255,255,255,.2);padding:2px 8px;border-radius:6px;margin-left:5px">NG</span></h1>
@@ -351,7 +313,7 @@
         </div>
     </div>
 
-    <div class="phone-container">
+    <div class="phone-container" id="phone-container">
 
         <!-- push notification -->
         <div id="push-notification">
@@ -362,35 +324,162 @@
             </div>
         </div>
 
-        <!-- menu overlay + side menu -->
+        <!-- menu overlay -->
         <div id="menu-overlay" onclick="toggleMenu()"></div>
+
+        <!-- SIDE MENU -->
         <div id="side-menu">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:25px">
-                <div style="width:45px;height:45px;border-radius:12px;background:var(--primary);display:flex;align-items:center;justify-content:center;font-weight:800;color:white">D</div>
-                <div><b id="user-name-profile">Digital User</b><br><small style="color:var(--primary)">@user_ng</small></div>
+            <div class="side-menu-top">
+                <!-- Support button at top -->
+                <a href="https://wa.me/2348157505037?text=Hello%20goSUPPORT" target="_blank" style="text-decoration:none">
+                    <button class="side-support-btn">🤝 goSUPPORT — Get Help</button>
+                </a>
+                <!-- Profile area -->
+                <div class="profile-area" onclick="openProfileModal()">
+                    <div class="profile-avatar"><canvas id="profile-canvas" width="96" height="96"></canvas></div>
+                    <div>
+                        <b id="user-name-profile" style="font-size:.9rem">Digital User</b><br>
+                        <small style="color:var(--primary)">@user_ng · Tap to edit</small>
+                    </div>
+                </div>
             </div>
+
             <div style="flex:1;overflow-y:auto;scrollbar-width:none">
                 <small style="opacity:.6;text-transform:uppercase;font-size:.6rem;letter-spacing:1px">Discovery</small>
-                <div class="menu-item"><span>🏪</span> Marketplace</div>
-                <div class="menu-item"><span>💼</span> eGovernment</div>
-                <div class="menu-item"><span>🔔</span> Notifications</div>
-                <div class="menu-item"><span>📩</span> Messages</div>
-                <div class="menu-item"><span>🔏</span> Digital Vault</div>
-                <div style="margin-top:20px">
+                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" class="menu-item" style="text-decoration:none"><span>🏪</span> Marketplace</a>
+                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" class="menu-item" style="text-decoration:none"><span>💼</span> eGovernment</a>
+                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" class="menu-item" style="text-decoration:none"><span>🔔</span> Notifications</a>
+                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" class="menu-item" style="text-decoration:none"><span>📩</span> Messages</a>
+                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" class="menu-item" style="text-decoration:none"><span>🔏</span> Digital Vault</a>
+
+                <div style="margin-top:16px">
                     <small style="opacity:.6;text-transform:uppercase;font-size:.6rem">Security &amp; Settings</small>
-                    <div class="menu-item" style="justify-content:space-between"><span>❄️ Freeze Card</span><label class="switch"><input type="checkbox" onchange="toggleFreeze(this.checked)"><span class="slider"></span></label></div>
-                    <div class="menu-item" style="justify-content:space-between"><span>🌓 Light Mode</span><label class="switch"><input type="checkbox" onchange="toggleTheme(this)"><span class="slider"></span></label></div>
-                    <div class="menu-item" onclick="clearAppData()" style="color:var(--danger)"><span>🗑️ Reset All Data</span></div>
+                    <div class="menu-item" style="justify-content:space-between"><span>❄️ Freeze Card</span><label class="switch"><input type="checkbox" onchange="toggleFreeze(this.checked)"><span class="slider-sw"></span></label></div>
+                    <div class="menu-item" style="justify-content:space-between"><span>🌓 Light Mode</span><label class="switch"><input type="checkbox" onchange="toggleTheme(this)"><span class="slider-sw"></span></label></div>
                 </div>
-                <div style="margin-top:20px">
-                    <small style="opacity:.6;text-transform:uppercase;font-size:.6rem">Quick Transfers</small>
-                    <div id="sidebar-friends"></div>
+
+                <div style="margin-top:16px">
+                    <small style="opacity:.6;text-transform:uppercase;font-size:.6rem">Wallet</small>
+                    <div class="menu-item" onclick="openWalletAddressModal()"><span>🔗</span> View Wallet Address</div>
+                </div>
+
+                <div style="margin-top:16px">
+                    <small style="opacity:.6;text-transform:uppercase;font-size:.6rem">Growth</small>
+                    <div class="menu-item" onclick="inviteToGoApps()"><span>🎁</span> Invite to goAPPs</div>
+                    <div class="menu-item" onclick="openBizPackageModal()"><span>🤖</span> Business Package</div>
                 </div>
             </div>
-            <button class="btn-action highlight" onclick="openModal('qr-share-modal')">My Wallet QR</button>
+
+            <div style="padding-top:14px">
+                <button class="btn-action highlight" onclick="openModal('qr-share-modal')" style="border-radius:12px;font-size:.82rem">My Wallet QR</button>
+            </div>
         </div>
 
-        <!-- TOPUP MODAL -->
+        <!-- ══════════════════════════
+             OVERLAY MODALS (inside phone)
+        ══════════════════════════ -->
+
+        <!-- Profile Modal -->
+        <div class="overlay-modal" id="profile-modal">
+            <div class="overlay-card">
+                <h3>✏️ Update Profile</h3>
+                <p>Enter your linked WhatsApp number to update your goAPPs profile.</p>
+                <input class="overlay-input" type="tel" id="profile-wa" placeholder="e.g. 08012345678">
+                <button class="overlay-btn primary" onclick="submitProfile()"><span class="btn-text">Submit via WhatsApp</span></button>
+                <p class="overlay-cancel" onclick="closeOverlay('profile-modal')">Cancel</p>
+            </div>
+        </div>
+
+        <!-- Wallet Address Modal -->
+        <div class="overlay-modal" id="wallet-address-modal">
+            <div class="overlay-card">
+                <h3>🔗 View Wallet Address</h3>
+                <p>Enter your WhatsApp number to receive your wallet address securely.</p>
+                <input class="overlay-input" type="tel" id="wallet-wa" placeholder="Your WhatsApp number">
+                <button class="overlay-btn primary" onclick="submitWalletAddress()">Send to WhatsApp</button>
+                <p class="overlay-cancel" onclick="closeOverlay('wallet-address-modal')">Cancel</p>
+            </div>
+        </div>
+
+        <!-- Business Package Modal -->
+        <div class="overlay-modal" id="biz-package-modal">
+            <div class="overlay-card">
+                <h3>🤖 Business Package</h3>
+                <p>Automate your business processes by deploying AI for business. Let goAPPs handle operations while you focus on growth.</p>
+                <input class="overlay-input" type="text" id="biz-name" placeholder="Business Name">
+                <input class="overlay-input" type="email" id="biz-email" placeholder="Business Email">
+                <input class="overlay-input" type="tel" id="biz-wa" placeholder="WhatsApp Number">
+                <button class="overlay-btn primary" onclick="submitBizPackage()">Check Status</button>
+                <p class="overlay-cancel" onclick="closeOverlay('biz-package-modal')">Cancel</p>
+            </div>
+        </div>
+
+        <!-- CVV OTP WhatsApp Modal -->
+        <div class="overlay-modal" id="cvv-otp-modal">
+            <div class="overlay-card">
+                <h3>🔐 Receive OTP</h3>
+                <p>Enter your WhatsApp number to receive your card OTP securely.</p>
+                <input class="overlay-input" type="tel" id="cvv-wa" placeholder="Your WhatsApp number">
+                <button class="overlay-btn primary" onclick="submitCVVOtp()">Send Request</button>
+                <p class="overlay-cancel" onclick="closeOverlay('cvv-otp-modal')">Cancel</p>
+            </div>
+        </div>
+
+        <!-- Hotlist / ICE Modal -->
+        <div class="overlay-modal" id="hotlist-modal">
+            <div class="overlay-card">
+                <h3>🚨 Hotlist Card</h3>
+                <p>Enter your ICE (In Case of Emergency) WhatsApp number to confirm card reset request.</p>
+                <input class="overlay-input" type="tel" id="hotlist-wa" placeholder="ICE WhatsApp Number">
+                <button class="overlay-btn primary" onclick="submitHotlist()" style="background:#ff4d4d;color:#fff">Send Reset Request</button>
+                <p class="overlay-cancel" onclick="closeOverlay('hotlist-modal')">Cancel</p>
+            </div>
+        </div>
+
+        <!-- Topup Server Modal -->
+        <div class="overlay-modal" id="topup-server-modal">
+            <div class="overlay-card">
+                <h3>⏳ Processing Request</h3>
+                <p id="topup-server-msg">Sending request to DigitalSolution server for approval...</p>
+                <div class="spinner" style="margin:10px auto;width:28px;height:28px;border-width:2px" id="topup-server-spinner"></div>
+                <p class="overlay-cancel" id="topup-server-cancel" style="display:none" onclick="closeOverlay('topup-server-modal')">Close</p>
+            </div>
+        </div>
+
+        <!-- See History Modal -->
+        <div class="overlay-modal" id="see-history-modal">
+            <div class="overlay-card">
+                <h3>📜 Transaction History</h3>
+                <p>Enter your connected WhatsApp number to view your full transaction history.</p>
+                <input class="overlay-input" type="tel" id="history-wa" placeholder="Connected WhatsApp number">
+                <button class="overlay-btn primary" onclick="submitSeeHistory()">Request View</button>
+                <p class="overlay-cancel" onclick="closeOverlay('see-history-modal')">Cancel</p>
+            </div>
+        </div>
+
+        <!-- Balance Reveal Modal (now overlay) -->
+        <div class="overlay-modal" id="reveal-modal">
+            <div class="overlay-card">
+                <h3>👁️ Verify Identity</h3>
+                <p>Enter your WhatsApp number to receive an OTP to reveal your balance.</p>
+                <input class="overlay-input" type="tel" id="user-whatsapp" placeholder="WhatsApp Number">
+                <button class="overlay-btn primary" onclick="handleRequest('OTP')">Send Request</button>
+                <p class="overlay-cancel" onclick="closeOverlay('reveal-modal')">Cancel</p>
+            </div>
+        </div>
+
+        <!-- Send Details Modal -->
+        <div class="overlay-modal" id="send-details-modal">
+            <div class="overlay-card">
+                <h3>📤 Receiver Details</h3>
+                <input class="overlay-input" type="tel" id="receiver-whatsapp" placeholder="Receiver WhatsApp No">
+                <input class="overlay-input" type="text" id="receiver-username" placeholder="goApp Username">
+                <button class="overlay-btn primary" onclick="handleRequest('Transfer')">Proceed</button>
+                <p class="overlay-cancel" onclick="closeOverlay('send-details-modal')">Cancel</p>
+            </div>
+        </div>
+
+        <!-- TOPUP MODAL (full screen) -->
         <div id="topup-modal" class="modal">
             <div class="topup-inner">
                 <div class="topup-icon">🏦</div>
@@ -405,7 +494,7 @@
                     <div class="select-wrapper"><select id="topup-currency" class="connect-input"><option value="NGN">🇳🇬 NGN - Nigerian Naira</option><option value="USD">🇺🇸 USD - Dollar</option></select></div>
                     <label>Amount</label>
                     <input type="number" id="topup-amount" class="connect-input" placeholder="0.00" inputmode="decimal">
-                    <button class="btn-action highlight" id="confirm-topup-btn" onclick="requestOTP()"><span class="btn-text">Proceed to Verify</span><div class="mini-spinner"></div></button>
+                    <button class="btn-action highlight" id="confirm-topup-btn" onclick="initiateTopup()"><span class="btn-text">Proceed to Verify</span><div class="mini-spinner"></div></button>
                 </div>
                 <div id="otp-step" style="display:none">
                     <div class="otp-box">
@@ -479,7 +568,10 @@
                                 <div style="background:#eee;height:25px;flex:1;border-radius:4px"></div>
                                 <div class="cvv-section" id="cvv-value">882</div>
                             </div>
-                            <button onclick="revealCVV(event)" style="background:none;border:1px solid var(--primary);color:var(--primary);font-size:.6rem;padding:4px 8px;border-radius:4px;margin-top:10px;cursor:pointer">Send OTP</button>
+                            <div class="card-back-btns">
+                                <button onclick="openCVVOtpModal(event)" class="card-back-btn">Send OTP</button>
+                                <button onclick="openHotlistModal(event)" class="card-back-btn danger-btn">🚨 Hotlist</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -493,19 +585,21 @@
                 <button class="slider-arrow right" onclick="slideBy(1)">&#8250;</button>
             </div>
 
-            <!-- BALANCE CARD -->
+            <!-- METALLIC BALANCE CARD -->
             <div class="balance-card">
                 <div class="balance-label">Token Balance</div>
                 <div style="display:flex;align-items:center;gap:10px;margin:4px 0 2px">
-                    <h2 id="balance-display">💰 ***.00</h2>
-                    <div class="balance-eye" onclick="openModal('reveal-modal')">👁️</div>
+                    <h2 id="balance-display" style="margin:0;font-size:1.85rem;font-weight:800;color:var(--balance-text);text-shadow:0 1px 2px rgba(255,255,255,.2)">₦***.00</h2>
+                    <div style="cursor:pointer;font-size:1.1rem;opacity:.7" onclick="openOverlay('reveal-modal')">👁️</div>
                 </div>
-                <div class="balance-bonus">🏆 Bonus: 2.00 gc &nbsp;·&nbsp; <span style="opacity:.6">Today</span></div>
-                <button class="send-btn" onclick="openModal('send-details-modal')">📤 Send Tokens</button>
+                <div style="font-size:.75rem;color:var(--balance-sub);margin-top:4px">🏆 Bonus: 2.00 gc &nbsp;·&nbsp; <span style="opacity:.6">Today</span></div>
+                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/HomeApp/transfer.html" style="text-decoration:none;display:block;width:100%">
+                    <button class="send-btn" style="width:100%">📤 Send Tokens</button>
+                </a>
                 <div class="plus-btn" onclick="openModal('topup-modal')">+</div>
             </div>
 
-            <!-- MINI FEED -->
+            <!-- MINI FEED (5 items) -->
             <div class="mini-feed">
                 <div class="mini-feed-header">
                     <span class="mini-feed-title">💳 Recent Activity</span>
@@ -515,39 +609,57 @@
                     <div class="feed-row"><div class="feed-icon gain">💰</div><div class="feed-info"><b>Wallet Top-up</b><small>GTBank · 0265544737</small></div><span class="feed-amount gain">+₦5,600.00</span></div>
                     <div class="feed-row"><div class="feed-icon spend">🚌</div><div class="feed-info"><b>goMETRO Fare(PL)</b><small>Today · 09:14 AM</small></div><span class="feed-amount spend">−₦200</span></div>
                     <div class="feed-row"><div class="feed-icon pend">⏳</div><div class="feed-info"><b>goCOINs Swap</b><small>Pending confirmation</small></div><span class="feed-amount pend">₦1,200</span></div>
+                    <div class="feed-row"><div class="feed-icon gain">🏆</div><div class="feed-info"><b>Bonus Reward</b><small>goAPPs Daily Bonus</small></div><span class="feed-amount gain">+₦50</span></div>
+                    <div class="feed-row"><div class="feed-icon spend">🛒</div><div class="feed-info"><b>goSHOP Purchase</b><small>Yesterday · 3:05 PM</small></div><span class="feed-amount spend">−₦850</span></div>
                 </div>
             </div>
 
-            <h3 class="section-title">Ready to Connect</h3>
+            <!-- READY TO CONNECT -->
+            <h3 class="section-title" style="font-size:1.2rem;font-weight:900;letter-spacing:.3px">Ready to Connect ⚡</h3>
             <div class="grid">
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><b>👨‍✈️</b><b>goPROTECT</b></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🚌</span><small><b>goMETRO</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>⚡</span><small><b>goUTILITY</b></small></div></a>
-                <a href="#" style="text-decoration:none;color:inherit"><div class="service-item"><span>🗞</span><small><b>goNEWs</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/HomeApp/balance.html" style="text-decoration:none;color:inherit"><div class="service-item highlight"><span>💰</span><small><b>goCOINs</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/goCBT/" style="text-decoration:none;color:inherit"><div class="service-item highlight"><span>🎓</span><small><b>goCBT</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>💼</span><small><b>goWORKPLACE</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🚑</span><small><b>goMEDIC</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🛒</span><small><b>goSHOP</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🎲</span><small><b>goGAMEs</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🛺</span><small><b>goKEKE</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🚚</span><small><b>goDISPATCH</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🚗</span><small><b>goRIDEs</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>✈</span><small><b>goTRIPs</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🧭</span><small><b>goNAVIG8</b></small></div></a>
-                <a href="https://wa.me/2348157505037?text=Hello%20goSUPPORT" style="text-decoration:none;color:inherit"><div class="service-item highlight"><span>🤝</span><small><b>goSUPPORT</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🐼</span><small><b>binPANDA</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🌱</span><small><b>ecoCREDIT</b></small></div></a>
-                <a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>💱</span><small><b>SwapR</b></small></div></a>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><b>👨‍✈️</b><b>goPROTECT</b></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🚌</span><small><b>goMETRO</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>⚡</span><small><b>goUTILITY</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="#" style="text-decoration:none;color:inherit"><div class="service-item"><span>🗞</span><small><b>goNEWs</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/HomeApp/balance.html" style="text-decoration:none;color:inherit"><div class="service-item highlight"><span>💰</span><small><b>goCOINs</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/goCBT/" style="text-decoration:none;color:inherit"><div class="service-item highlight"><span>🎓</span><small><b>goCBT</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>💼</span><small><b>goWORKPLACE</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🚑</span><small><b>goMEDIC</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🛒</span><small><b>goSHOP</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🎲</span><small><b>goGAMEs</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🛺</span><small><b>goKEKE</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🚚</span><small><b>goDISPATCH</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🚗</span><small><b>goRIDEs</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>✈</span><small><b>goTRIPs</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🧭</span><small><b>goNAVIG8</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://wa.me/2348157505037?text=Hello%20goSUPPORT" style="text-decoration:none;color:inherit"><div class="service-item highlight"><span>🤝</span><small><b>goSUPPORT</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🐼</span><small><b>binPANDA</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>🌱</span><small><b>ecoCREDIT</b></small></div></a></div>
+                <div class="service-item-wrap"><a href="https://goapps-official.github.io/Welcome-to-goAPPs/%E2%9A%92%EF%B8%8FgoAPPs-Repair%20Mode.html" style="text-decoration:none;color:inherit"><div class="service-item"><span>💱</span><small><b>SwapR</b></small></div></a></div>
             </div>
 
+            <!-- TRANSACTION HISTORY -->
             <h3 class="section-title">Transaction History 📜</h3>
-            <div id="local-history-feed" style="background:var(--card);border-radius:20px;padding:15px;margin-bottom:20px"><div style="text-align:center;opacity:.5;font-size:.7rem">No transactions yet</div></div>
+            <div class="history-blur-wrap">
+                <div id="local-history-feed" class="history-blur-inner" style="background:var(--card);border-radius:20px;padding:15px;margin-bottom:20px">
+                    <!-- Placeholder blurred items -->
+                    <div class="history-item"><div><b style="font-size:.75rem">Wallet Top-up</b><br><small style="opacity:.6">10:00 AM · Today</small></div><div style="font-weight:800;color:var(--primary)">+ ₦5,600</div></div>
+                    <div class="history-item"><div><b style="font-size:.75rem">goMETRO Fare</b><br><small style="opacity:.6">09:14 AM · Today</small></div><div style="font-weight:800;color:var(--danger)">- ₦200</div></div>
+                    <div class="history-item"><div><b style="font-size:.75rem">goCOINs Swap</b><br><small style="opacity:.6">Yesterday</small></div><div style="font-weight:800;color:#f59e0b">₦1,200</div></div>
+                    <div class="history-item"><div><b style="font-size:.75rem">Bonus Reward</b><br><small style="opacity:.6">Yesterday</small></div><div style="font-weight:800;color:var(--primary)">+ ₦50</div></div>
+                    <div class="history-item" style="border:none"><div><b style="font-size:.75rem">goSHOP Purchase</b><br><small style="opacity:.6">2 days ago</small></div><div style="font-weight:800;color:var(--danger)">- ₦850</div></div>
+                </div>
+                <div class="see-history-overlay">
+                    <span style="font-size:.75rem;color:var(--text2)">🔒 History is protected</span>
+                    <button class="see-history-btn" onclick="openOverlay('see-history-modal')">See History</button>
+                </div>
+            </div>
+
             <h3 class="section-title">Recent Connections</h3>
             <div class="horizontal-list" id="recent-connections"></div>
         </div>
 
-        <!-- ══ BUSINESS FAB ══ -->
+        <!-- BUSINESS FAB -->
         <div id="biz-fab">
             <div class="biz-label">💼 Get goAPPs Business</div>
             <button class="biz-btn" onclick="openBizPage()" title="goAPPs Business Agent" aria-label="Get goAPPs Business">
@@ -556,7 +668,7 @@
             </button>
         </div>
 
-        <!-- ══ PWA INSTALL BANNER ══ -->
+        <!-- PWA BANNER -->
         <div id="pwa-banner">
             <div class="pwa-icon">📲</div>
             <div class="pwa-info">
@@ -576,287 +688,318 @@
 
     </div><!-- /phone-container -->
 
-    <!-- REVEAL MODAL -->
-    <div id="reveal-modal" class="modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center">
-        <div style="background:white;padding:25px;border-radius:20px;width:85%;max-width:320px;text-align:center">
-            <h3 style="margin-top:0;color:#333">Verify Identity</h3>
-            <p style="font-size:.8rem;color:#666">Enter your WhatsApp number to receive an OTP to reveal your balance.</p>
-            <input type="number" id="user-whatsapp" placeholder="WhatsApp Number" style="width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ddd;box-sizing:border-box">
-            <button onclick="handleRequest('OTP')" style="width:100%;padding:12px;border-radius:10px;border:none;background:#00d28d;color:white;font-weight:800;cursor:pointer">Send Request</button>
-            <p onclick="closeModal('reveal-modal')" style="margin-top:15px;font-size:.8rem;color:#888;cursor:pointer">Cancel</p>
-        </div>
-    </div>
-
-    <!-- SEND DETAILS MODAL -->
-    <div id="send-details-modal" class="modal-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center">
-        <div style="background:white;padding:25px;border-radius:20px;width:85%;max-width:320px;text-align:center">
-            <h3 style="margin-top:0;color:#333">Receiver Details</h3>
-            <input type="number" id="receiver-whatsapp" placeholder="Receiver WhatsApp No" style="width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ddd;box-sizing:border-box">
-            <input type="text" id="receiver-username" placeholder="goApp Username" style="width:100%;padding:12px;margin:10px 0;border-radius:10px;border:1px solid #ddd;box-sizing:border-box">
-            <button onclick="handleRequest('Transfer')" style="width:100%;padding:12px;border-radius:10px;border:none;background:#333;color:white;font-weight:800;cursor:pointer">Proceed</button>
-            <p onclick="closeModal('send-details-modal')" style="margin-top:15px;font-size:.8rem;color:#888;cursor:pointer">Cancel</p>
-        </div>
-    </div>
-
 <script>
-// ══════════════════════════════════════════════
-//  PWA — inline manifest + service worker
-// ══════════════════════════════════════════════
+// ══ PWA ══
 (function injectPWA(){
-    // Inline manifest as a blob URL
-    const manifest={
-        name:"goAPPs Nigeria",
-        short_name:"goAPPs",
-        description:"Your all-in-one Nigerian digital wallet & services",
-        start_url:"./",
-        display:"standalone",
-        background_color:"#081f14",
-        theme_color:"#00d28d",
-        orientation:"portrait",
-        icons:[
-            {src:"https://via.placeholder.com/192/00d28d/062c1e?text=G",sizes:"192x192",type:"image/png"},
-            {src:"https://via.placeholder.com/512/00d28d/062c1e?text=G",sizes:"512x512",type:"image/png",purpose:"maskable"}
-        ]
-    };
+    const manifest={name:"goAPPs Nigeria",short_name:"goAPPs",description:"Your all-in-one Nigerian digital wallet & services",start_url:"./",display:"standalone",background_color:"#081f14",theme_color:"#00d28d",orientation:"portrait",icons:[{src:"https://via.placeholder.com/192/00d28d/062c1e?text=G",sizes:"192x192",type:"image/png"},{src:"https://via.placeholder.com/512/00d28d/062c1e?text=G",sizes:"512x512",type:"image/png",purpose:"maskable"}]};
     const blob=new Blob([JSON.stringify(manifest)],{type:"application/manifest+json"});
-    const url=URL.createObjectURL(blob);
-    document.getElementById('pwa-manifest-link').href=url;
-
-    // Inline service worker via blob URL
-    const swCode=`
-const CACHE='goapps-v1';
-const ASSETS=['./'];
-self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));
-  self.skipWaiting();
-});
-self.addEventListener('activate',e=>{
-  e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));
-  self.clients.claim();
-});
-self.addEventListener('fetch',e=>{
-  if(e.request.method!=='GET') return;
-  e.respondWith(
-    fetch(e.request).then(r=>{
-      const clone=r.clone();
-      caches.open(CACHE).then(c=>c.put(e.request,clone));
-      return r;
-    }).catch(()=>caches.match(e.request))
-  );
-});
-`;
+    document.getElementById('pwa-manifest-link').href=URL.createObjectURL(blob);
+    const swCode=`const CACHE='goapps-v2';self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{if(e.request.method!=='GET') return;e.respondWith(fetch(e.request).then(r=>{const cl=r.clone();caches.open(CACHE).then(c=>c.put(e.request,cl));return r;}).catch(()=>caches.match(e.request)));});`;
     const swBlob=new Blob([swCode],{type:'application/javascript'});
-    const swURL=URL.createObjectURL(swBlob);
-    if('serviceWorker' in navigator){
-        navigator.serviceWorker.register(swURL,{scope:'./'}).catch(()=>{});
-    }
+    if('serviceWorker' in navigator) navigator.serviceWorker.register(URL.createObjectURL(swBlob),{scope:'./'}).catch(()=>{});
 })();
 
-// ══ PWA INSTALL BANNER — slides in from top with notification tone ══
-let deferredInstall=null;
-
-/* notification chime — two-tone "ding-dong" */
-function playPWATone(){
+// ══ SOUND + HAPTIC ══
+function playChime(type='confirm'){
     try{
         const ctx=new(window.AudioContext||window.webkitAudioContext)();
-        // tone 1: soft high ding
-        const notes=[[880,0,.18],[659.25,.22,.24]];
-        notes.forEach(([freq,delay,dur])=>{
+        const configs={
+            confirm:[[523.25,0],[659.25,.12],[783.99,.24]],
+            success:[[783.99,0],[987.77,.15]],
+            error:[[349.23,0],[277.18,.12]],
+            notify:[[880,0,.18],[659.25,.22,.24]],
+            tap:[[1046.5,0]]
+        };
+        const notes=configs[type]||configs.tap;
+        notes.forEach(([freq,delay,dur=.45])=>{
             const osc=ctx.createOscillator();
             const gn=ctx.createGain();
             osc.connect(gn);gn.connect(ctx.destination);
             osc.type='sine';
             osc.frequency.setValueAtTime(freq,ctx.currentTime+delay);
             gn.gain.setValueAtTime(0,ctx.currentTime+delay);
-            gn.gain.linearRampToValueAtTime(.28,ctx.currentTime+delay+.015);
+            gn.gain.linearRampToValueAtTime(.22,ctx.currentTime+delay+.02);
             gn.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+delay+dur);
             osc.start(ctx.currentTime+delay);
             osc.stop(ctx.currentTime+delay+dur+.02);
         });
-        // subtle double-tap haptic
-        if(navigator.vibrate) navigator.vibrate([30,60,30]);
     }catch(e){}
 }
+function triggerHaptic(pattern=[50,30,50]){if(navigator.vibrate)navigator.vibrate(pattern);}
+function soundAndHaptic(type='confirm'){playChime(type);triggerHaptic();}
 
-function showPWABanner(){
-    const b=document.getElementById('pwa-banner');
-    b.style.display='flex';          // make it flex first so transition fires
-    // force reflow so the transition plays from the hidden state
-    b.getBoundingClientRect();
-    requestAnimationFrame(()=>{
-        b.classList.remove('hide');
-        b.classList.add('show');
-        playPWATone();
-    });
-}
-
-function dismissPWA(){
-    const b=document.getElementById('pwa-banner');
-    b.classList.remove('show');
-    b.classList.add('hide');
-    // hide from layout after slide-out completes
-    setTimeout(()=>{ b.style.display='none'; b.classList.remove('hide'); },500);
-}
-
-window.addEventListener('beforeinstallprompt',e=>{
-    e.preventDefault();
-    deferredInstall=e;
-    setTimeout(showPWABanner, 3500);
-});
-document.getElementById('pwa-install-btn').addEventListener('click',()=>{
-    if(!deferredInstall) return;
-    deferredInstall.prompt();
-    deferredInstall.userChoice.then(()=>{deferredInstall=null;dismissPWA();});
-});
+// ══ PWA BANNER ══
+let deferredInstall=null;
+function playPWATone(){playChime('notify');if(navigator.vibrate)navigator.vibrate([30,60,30]);}
+function showPWABanner(){const b=document.getElementById('pwa-banner');b.style.display='flex';b.getBoundingClientRect();requestAnimationFrame(()=>{b.classList.remove('hide');b.classList.add('show');playPWATone();});}
+function dismissPWA(){const b=document.getElementById('pwa-banner');b.classList.remove('show');b.classList.add('hide');setTimeout(()=>{b.style.display='none';b.classList.remove('hide');},500);}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;setTimeout(showPWABanner,3500);});
+document.getElementById('pwa-install-btn').addEventListener('click',()=>{if(!deferredInstall)return;deferredInstall.prompt();deferredInstall.userChoice.then(()=>{deferredInstall=null;dismissPWA();});});
 window.addEventListener('appinstalled',()=>{dismissPWA();triggerPushNotify('📲 goAPPs Installed','App added to your home screen.',true);});
 
-// ══════════════════════════════════════════════
-//  BUSINESS FAB — appear after 2s + chime
-// ══════════════════════════════════════════════
-function playChime(){
-    try{
-        const ctx=new (window.AudioContext||window.webkitAudioContext)();
-        // Three ascending tones: a pleasant major-triad ding
-        [[523.25,0],[659.25,.12],[783.99,.24]].forEach(([freq,delay])=>{
-            const osc=ctx.createOscillator();
-            const gain=ctx.createGain();
-            osc.connect(gain);gain.connect(ctx.destination);
-            osc.type='sine';
-            osc.frequency.setValueAtTime(freq,ctx.currentTime+delay);
-            gain.gain.setValueAtTime(0,ctx.currentTime+delay);
-            gain.gain.linearRampToValueAtTime(.22,ctx.currentTime+delay+.02);
-            gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+delay+.55);
-            osc.start(ctx.currentTime+delay);
-            osc.stop(ctx.currentTime+delay+.58);
-        });
-        // tiny haptic
-        if(navigator.vibrate) navigator.vibrate([40,20,40]);
-    }catch(e){}
+// ══ BIZ FAB ══
+function showBizFAB(){document.getElementById('biz-fab').classList.add('visible');playChime('confirm');}
+function openBizPage(){window.open('https://wa.me/2348157505037?text=I%20want%20to%20know%20about%20goAPPs%20Business','_blank');}
+setTimeout(showBizFAB,3800);
+
+// ══ ABSTRACT PROFILE AVATAR ══
+function drawAbstractAvatar(canvas){
+    const ctx=canvas.getContext('2d');
+    const w=canvas.width,h=canvas.height;
+    const seed=parseInt(localStorage.getItem('goapps_avatar_seed')||String(Math.floor(Math.random()*9999)));
+    localStorage.setItem('goapps_avatar_seed',seed);
+    const r=(n)=>{let x=Math.sin(seed+n)*10000;return x-Math.floor(x);};
+    const hue1=Math.floor(r(1)*360),hue2=Math.floor(r(2)*360);
+    const grd=ctx.createLinearGradient(0,0,w,h);
+    grd.addColorStop(0,`hsl(${hue1},70%,45%)`);
+    grd.addColorStop(1,`hsl(${hue2},80%,55%)`);
+    ctx.fillStyle=grd;ctx.fillRect(0,0,w,h);
+    for(let i=0;i<7;i++){
+        ctx.beginPath();
+        const cx=r(i*3)*w,cy=r(i*3+1)*h,rad=r(i*3+2)*40+10;
+        ctx.arc(cx,cy,rad,0,Math.PI*2);
+        ctx.fillStyle=`hsla(${Math.floor(r(i*5)*360)},80%,70%,0.35)`;
+        ctx.fill();
+    }
+    // initials
+    ctx.fillStyle='rgba(255,255,255,0.9)';
+    ctx.font='bold 36px Inter,sans-serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText('D',w/2,h/2);
 }
 
-function showBizFAB(){
-    const fab=document.getElementById('biz-fab');
-    fab.classList.add('visible');
-    playChime();
-}
-
-function openBizPage(){
-    // Open WhatsApp to goAPPs Business line
-    window.open('https://wa.me/2348157505037?text=I%20want%20to%20know%20about%20goAPPs%20Business','_blank');
-}
-
-// Show FAB 2 seconds after splash clears
-setTimeout(showBizFAB, 3800);
-
-// ══════════════════════════════════════════════
-//  APP DATA
-// ══════════════════════════════════════════════
-let appData={balance:5600.00,history:[]};
-const STORAGE_KEY='goapps_v1_data';
-const friends=[{name:"Musa",addr:"0x82...112a"},{name:"Sarah",addr:"0x33...990b"}];
+// ══ APP DATA ══
+const STORAGE_KEY='goapps_v2_data';
+let appData={history:[]};
 
 document.addEventListener('DOMContentLoaded',()=>{
-    loadPersistence();renderFriends();syncCardName();initImageSlider();
+    loadPersistence();
+    syncCardName();
+    initImageSlider();
+    renderFriends();
+    // Draw avatar
+    const canvas=document.getElementById('profile-canvas');
+    if(canvas) drawAbstractAvatar(canvas);
+    // Splash
     setTimeout(()=>{
-        document.getElementById('splash-screen').style.opacity='0';
-        setTimeout(()=>document.getElementById('splash-screen').style.display='none',600);
+        const s=document.getElementById('splash-screen');
+        s.style.opacity='0';
+        setTimeout(()=>s.style.display='none',600);
     },1500);
 });
 
-function loadPersistence(){const saved=localStorage.getItem(STORAGE_KEY);if(saved){appData=JSON.parse(saved);updateBalanceUI();renderHistoryUI();}}
+function loadPersistence(){const saved=localStorage.getItem(STORAGE_KEY);if(saved){appData=JSON.parse(saved);renderHistoryUI();}}
 function savePersistence(){localStorage.setItem(STORAGE_KEY,JSON.stringify(appData));}
-function clearAppData(){if(confirm("Reset all data?")){localStorage.removeItem(STORAGE_KEY);location.reload();}}
 
+// ══ NOTIFICATIONS ══
 function triggerPushNotify(title,message,isGain=true){
     const n=document.getElementById('push-notification');
     document.getElementById('notify-title').innerText=title;
     document.getElementById('notify-body').innerText=message;
-    n.classList.add('show');triggerHaptic();
+    n.classList.add('show');triggerHaptic();playChime(isGain?'success':'notify');
     setTimeout(()=>n.classList.remove('show'),4000);
     appData.history.unshift({title,message,isGain,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),date:new Date().toLocaleDateString()});
     savePersistence();renderHistoryUI();
 }
 
 function renderHistoryUI(){
+    if(appData.history.length===0)return;
     const feed=document.getElementById('local-history-feed');
-    if(appData.history.length===0) return;
-    feed.innerHTML=appData.history.slice(0,10).map(item=>`<div class="history-item"><div style="font-size:.75rem"><b>${item.title}</b><br><small style="opacity:.6">${item.time} • ${item.date}</small></div><div style="font-weight:800;color:${item.isGain?'var(--primary)':'var(--danger)'}">${item.isGain?'+':'-'} ${item.message.match(/₦[\d,.]+/)}</div></div>`).join('');
+    feed.innerHTML=appData.history.slice(0,5).map(item=>`<div class="history-item"><div style="font-size:.75rem"><b>${item.title}</b><br><small style="opacity:.6">${item.time} • ${item.date}</small></div><div style="font-weight:800;color:${item.isGain?'var(--primary)':'var(--danger)'}">${item.isGain?'+':'-'} ${item.message.match(/₦[\d,.]+/)||''}</div></div>`).join('');
     const miniList=document.getElementById('mini-feed-list');
-    if(!miniList) return;
-    const recent=appData.history.slice(0,3);
+    if(!miniList||appData.history.length===0)return;
+    const recent=appData.history.slice(0,5);
     miniList.innerHTML=recent.map(item=>{const amtMatch=item.message.match(/₦[\d,.]+/);const amt=amtMatch?amtMatch[0]:'';const icon=item.isGain?'💰':'📤';const cls=item.isGain?'gain':'spend';const sign=item.isGain?'+':'−';return`<div class="feed-row"><div class="feed-icon ${cls}">${icon}</div><div class="feed-info"><b>${item.title}</b><small>${item.time} · ${item.date}</small></div><span class="feed-amount ${cls}">${sign}${amt}</span></div>`;}).join('');
 }
 
-function triggerHaptic(){if(navigator.vibrate)navigator.vibrate([50,30,50]);}
-function toggleMenu(){document.getElementById('app-body').classList.toggle('menu-open');}
-function openModal(id){document.querySelectorAll('.modal').forEach(m=>m.style.display='none');document.getElementById(id).style.display='flex';document.getElementById('app-body').classList.remove('menu-open');}
+// ══ MODAL HELPERS ══
+function openModal(id){document.querySelectorAll('.modal').forEach(m=>m.style.display='none');document.getElementById(id).style.display='flex';document.getElementById('app-body').classList.remove('menu-open');soundAndHaptic('tap');}
 function closeModals(){document.querySelectorAll('.modal').forEach(m=>m.style.display='none');}
+function openOverlay(id){document.getElementById(id).classList.add('show');soundAndHaptic('tap');}
+function closeOverlay(id){document.getElementById(id).classList.remove('show');}
+function openProfileModal(){closeModals();openOverlay('profile-modal');}
+function openWalletAddressModal(){document.getElementById('app-body').classList.remove('menu-open');openOverlay('wallet-address-modal');}
+function openBizPackageModal(){document.getElementById('app-body').classList.remove('menu-open');openOverlay('biz-package-modal');}
 
+// ══ WHATSAPP HELPERS ══
+function goWhatsApp(num,msg){window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`,'_blank');}
+const SUPPORT_WA='2348157505037';
+
+function submitProfile(){
+    const num=document.getElementById('profile-wa').value.trim();
+    if(!num){alert('Enter your WhatsApp number');return;}
+    soundAndHaptic('confirm');
+    closeOverlay('profile-modal');
+    goWhatsApp(SUPPORT_WA,`Profile Update Request\nWhatsApp: ${num}`);
+}
+
+function submitWalletAddress(){
+    const num=document.getElementById('wallet-wa').value.trim();
+    if(!num){alert('Enter your WhatsApp number');return;}
+    soundAndHaptic('confirm');
+    closeOverlay('wallet-address-modal');
+    goWhatsApp(SUPPORT_WA,`Wallet Address Request\nWhatsApp: ${num}`);
+}
+
+function submitBizPackage(){
+    const name=document.getElementById('biz-name').value.trim();
+    const email=document.getElementById('biz-email').value.trim();
+    const wa=document.getElementById('biz-wa').value.trim();
+    if(!name||!email||!wa){alert('Please fill in all fields');return;}
+    soundAndHaptic('confirm');
+    closeOverlay('biz-package-modal');
+    goWhatsApp(SUPPORT_WA,`Business Package Request\nBusiness: ${name}\nEmail: ${email}\nWhatsApp: ${wa}`);
+}
+
+function openCVVOtpModal(event){
+    event.stopPropagation();
+    openOverlay('cvv-otp-modal');
+}
+
+function submitCVVOtp(){
+    const num=document.getElementById('cvv-wa').value.trim();
+    if(!num){alert('Enter your WhatsApp number');return;}
+    soundAndHaptic('confirm');
+    closeOverlay('cvv-otp-modal');
+    goWhatsApp(SUPPORT_WA,`Card OTP Request\nWhatsApp: ${num}`);
+}
+
+function openHotlistModal(event){
+    event.stopPropagation();
+    openOverlay('hotlist-modal');
+}
+
+function submitHotlist(){
+    const num=document.getElementById('hotlist-wa').value.trim();
+    if(!num){alert('Enter ICE WhatsApp number');return;}
+    soundAndHaptic('error');
+    triggerHaptic([100,50,100,50,100]);
+    closeOverlay('hotlist-modal');
+    goWhatsApp(SUPPORT_WA,`🚨 HOTLIST / Card Reset Request\nICE WhatsApp: ${num}`);
+}
+
+function submitSeeHistory(){
+    const num=document.getElementById('history-wa').value.trim();
+    if(!num){alert('Enter your WhatsApp number');return;}
+    soundAndHaptic('confirm');
+    closeOverlay('see-history-modal');
+    goWhatsApp(SUPPORT_WA,`Transaction History Request\nWhatsApp: ${num}`);
+}
+
+// ══ TOPUP — Server modal then WhatsApp ══
+function initiateTopup(){
+    const amount=document.getElementById('topup-amount').value;
+    if(!amount||amount<=0){alert('Please enter amount');return;}
+    const currency=document.getElementById('topup-currency').value;
+    soundAndHaptic('tap');
+    // Show server simulation modal
+    const serverModal=document.getElementById('topup-server-modal');
+    const msgEl=document.getElementById('topup-server-msg');
+    const spinnerEl=document.getElementById('topup-server-spinner');
+    const cancelEl=document.getElementById('topup-server-cancel');
+    msgEl.textContent='Sending request to DigitalSolution server for approval...';
+    spinnerEl.style.display='block';
+    cancelEl.style.display='none';
+    serverModal.classList.add('show');
+    setTimeout(()=>{
+        spinnerEl.style.display='none';
+        msgEl.textContent='✅ Request received! Redirecting to WhatsApp for confirmation...';
+        cancelEl.style.display='block';
+        soundAndHaptic('success');
+        setTimeout(()=>{
+            serverModal.classList.remove('show');
+            closeModals();
+            goWhatsApp(SUPPORT_WA,`Top-up Request\nAmount: ${currency} ${amount}\nCurrency: ${currency}`);
+        },1800);
+    },2200);
+}
+
+function executeTopup(){
+    const otp=document.getElementById('topup-otp').value;
+    if(otp.length<6){alert('Invalid OTP');return;}
+    const btn=document.getElementById('verify-otp-btn');
+    btn.classList.add('btn-loading');
+    soundAndHaptic('confirm');
+    setTimeout(()=>{const amount=parseFloat(document.getElementById('topup-amount').value);const currency=document.getElementById('topup-currency').value;let conversion=amount*(currency==='USD'?1500:1);btn.classList.remove('btn-loading');closeTopupModal();triggerPushNotify('💰 Top-up Successful',`₦${conversion.toLocaleString()} added via ${currency}.`,true);},2000);
+}
+
+function updateBalanceUI(){/* balance always hidden */}
+function closeTopupModal(){closeModals();setTimeout(()=>{document.getElementById('topup-form-step').style.display='block';document.getElementById('otp-step').style.display='none';document.getElementById('topup-amount').value='';document.getElementById('topup-otp').value='';},500);}
+
+// ══ SEND / TRANSFER ══
 async function pasteAddress(){try{const text=await navigator.clipboard.readText();document.getElementById('send-address').value=text;triggerHaptic();}catch(err){alert("Please paste manually.");}}
 
 function requireTransferPin(){
     const addr=document.getElementById('send-address').value;
     const amt=parseFloat(document.getElementById('send-amount').value);
-    if(!addr||addr.length<5) return alert("Enter recipient address");
-    if(!amt||amt<=0||amt>appData.balance) return alert("Insufficient balance or invalid amount");
+    if(!addr||addr.length<5){alert("Enter recipient address");return;}
+    if(!amt||amt<=0){alert("Invalid amount");return;}
     document.getElementById('review-amount').innerText=`₦${amt.toLocaleString()}`;
     document.getElementById('review-address').innerText=`To: ${addr}`;
     document.getElementById('send-step-1').style.display='none';
     document.getElementById('send-step-pin').style.display='block';
-    triggerHaptic();
+    soundAndHaptic('tap');
 }
 
 function executeTransfer(){
     const pin=document.getElementById('transfer-pin').value;
     const amount=parseFloat(document.getElementById('send-amount').value);
     const btn=document.getElementById('confirm-send-btn');
-    if(pin!=="1234"){triggerHaptic();return alert("Incorrect PIN!");}
+    if(pin!=="1234"){soundAndHaptic('error');triggerHaptic([100,50,100]);return alert("Incorrect PIN!");}
     btn.classList.add('btn-loading');
-    setTimeout(()=>{appData.balance-=amount;updateBalanceUI();savePersistence();btn.classList.remove('btn-loading');closeSendModal();triggerPushNotify("📤 Transfer Sent",`₦${amount.toLocaleString()} sent to ${document.getElementById('send-address').value.substring(0,8)}...`,false);},2000);
+    soundAndHaptic('confirm');
+    setTimeout(()=>{btn.classList.remove('btn-loading');closeSendModal();triggerPushNotify("📤 Transfer Sent",`₦${amount.toLocaleString()} sent to ${document.getElementById('send-address').value.substring(0,8)}...`,false);},2000);
 }
 
-function requestOTP(){
-    const amount=document.getElementById('topup-amount').value;
-    if(!amount||amount<=0) return alert("Please enter amount");
-    const btn=document.getElementById('confirm-topup-btn');
-    btn.classList.add('btn-loading');
-    setTimeout(()=>{btn.classList.remove('btn-loading');document.getElementById('topup-form-step').style.display='none';document.getElementById('otp-step').style.display='block';triggerHaptic();setTimeout(()=>{document.getElementById('topup-otp').value="482931";triggerHaptic();},2000);},1500);
-}
-
-function executeTopup(){
-    const otp=document.getElementById('topup-otp').value;
-    if(otp.length<6) return alert("Invalid OTP");
-    const btn=document.getElementById('verify-otp-btn');
-    btn.classList.add('btn-loading');
-    setTimeout(()=>{const amount=parseFloat(document.getElementById('topup-amount').value);const currency=document.getElementById('topup-currency').value;let conversion=amount*(currency==='USD'?1500:1);appData.balance+=conversion;updateBalanceUI();savePersistence();btn.classList.remove('btn-loading');closeTopupModal();triggerPushNotify("💰 Top-up Successful",`₦${conversion.toLocaleString()} added via ${currency}.`,true);},2000);
-}
-
-function updateBalanceUI(){document.getElementById('balance-display').innerText=`₦${appData.balance.toLocaleString(undefined,{minimumFractionDigits:2})}`;}
 function closeSendModal(){closeModals();setTimeout(()=>{document.getElementById('send-step-1').style.display='block';document.getElementById('send-step-pin').style.display='none';document.getElementById('send-amount').value='';document.getElementById('send-address').value='';document.getElementById('transfer-pin').value='';},500);}
-function closeTopupModal(){closeModals();setTimeout(()=>{document.getElementById('topup-form-step').style.display='block';document.getElementById('otp-step').style.display='none';document.getElementById('topup-amount').value='';document.getElementById('topup-otp').value='';},500);}
-function toggleFreeze(isFrozen){const card=document.getElementById('myCard');isFrozen?card.classList.add('is-frozen'):card.classList.remove('is-frozen');}
-function flipCard(event){if(event.target.tagName==='BUTTON') return;document.getElementById('myCard').classList.toggle('is-flipped');}
-function revealCVV(event){event.stopPropagation();if(prompt("Enter Security PIN (1234):")==="1234"){document.getElementById('cvv-value').classList.add('unblurred');setTimeout(()=>document.getElementById('cvv-value').classList.remove('unblurred'),5000);}}
-function renderFriends(){const s=document.getElementById('sidebar-friends');const r=document.getElementById('recent-connections');s.innerHTML=friends.map(f=>`<div class="menu-item" onclick="openSendTo('${f.name}','${f.addr}')"><span>🟢</span> ${f.name}</div>`).join('');r.innerHTML=friends.map(f=>`<div style="text-align:center;min-width:60px;cursor:pointer" onclick="openSendTo('${f.name}','${f.addr}')"><div style="width:45px;height:45px;border-radius:50%;background:var(--card);border:1px solid var(--primary);display:flex;align-items:center;justify-content:center;margin:auto">${f.name[0]}</div><small>${f.name}</small></div>`).join('');}
+
+// ══ CARD ══
+function toggleFreeze(isFrozen){const card=document.getElementById('myCard');isFrozen?card.classList.add('is-frozen'):card.classList.remove('is-frozen');soundAndHaptic(isFrozen?'error':'success');}
+function flipCard(event){if(event.target.tagName==='BUTTON')return;document.getElementById('myCard').classList.toggle('is-flipped');soundAndHaptic('tap');}
+
+// ══ MENU ══
+function toggleMenu(){document.getElementById('app-body').classList.toggle('menu-open');soundAndHaptic('tap');}
+
+// ══ FRIENDS ══
+const friends=[{name:"Musa",addr:"0x82...112a"},{name:"Sarah",addr:"0x33...990b"}];
+function renderFriends(){
+    const r=document.getElementById('recent-connections');
+    r.innerHTML=friends.map(f=>`<div style="text-align:center;min-width:60px;cursor:pointer" onclick="openSendTo('${f.name}','${f.addr}')"><div style="width:45px;height:45px;border-radius:50%;background:var(--card);border:1px solid var(--primary);display:flex;align-items:center;justify-content:center;margin:auto">${f.name[0]}</div><small>${f.name}</small></div>`).join('');
+}
 function openSendTo(name,addr){document.getElementById('send-modal-title').innerText="Send to "+name;document.getElementById('send-address').value=addr||'';openModal('send-modal');}
 function syncCardName(){document.getElementById('card-name-display').innerText=document.getElementById('user-name-profile').innerText.toUpperCase();}
 
+// ══ THEME ══
 function toggleTheme(el){
     const isLight=document.body.classList.toggle('light-mode');
     const rect=el?el.getBoundingClientRect():{left:window.innerWidth/2,top:window.innerHeight/2,width:0,height:0};
-    const ripple=document.createElement('div');
-    ripple.className='theme-ripple';
-    const size=30;
-    ripple.style.cssText=`width:${size}px;height:${size}px;left:${rect.left+rect.width/2-size/2}px;top:${rect.top+rect.height/2-size/2}px;background:${isLight?'rgba(0,210,141,.15)':'rgba(6,44,30,.2)'};`;
-    document.body.appendChild(ripple);
-    setTimeout(()=>ripple.remove(),550);
+    const ripple=document.createElement('div');ripple.className='theme-ripple';
+    const size=30;ripple.style.cssText=`width:${size}px;height:${size}px;left:${rect.left+rect.width/2-size/2}px;top:${rect.top+rect.height/2-size/2}px;background:${isLight?'rgba(0,210,141,.15)':'rgba(6,44,30,.2)'};`;
+    document.body.appendChild(ripple);setTimeout(()=>ripple.remove(),550);
     document.querySelectorAll('input[onchange*="toggleTheme"]').forEach(s=>s.checked=isLight);
+    soundAndHaptic('tap');
 }
 
-function copyAccount(){navigator.clipboard.writeText("0265544737");triggerHaptic();alert("Account number copied!");}
-function copyAddress(btn){navigator.clipboard.writeText("0x71C7656EC7ab88b098defB751B7401B5f6d52A3");btn.innerText="✅ Copied!";setTimeout(()=>btn.innerText="📋 Copy Address",2000);}
+// ══ INVITE ══
+function inviteToGoApps(){
+    soundAndHaptic('confirm');
+    if(navigator.share){
+        navigator.share({title:'goAPPs Nigeria',text:'Join me on goAPPs — Nigeria\'s all-in-one digital wallet & services platform! 🚀',url:'https://goapps-official.github.io/Welcome-to-goAPPs/'}).catch(()=>{});
+    } else {
+        navigator.clipboard.writeText('https://goapps-official.github.io/Welcome-to-goAPPs/').then(()=>alert('goAPPs link copied! Share it with your friends.'));
+    }
+}
 
-// ── IMAGE SLIDER ──
+// ══ MISC ══
+function copyAccount(){navigator.clipboard.writeText("0265544737");triggerHaptic();soundAndHaptic('success');alert("Account number copied!");}
+function copyAddress(btn){navigator.clipboard.writeText("0x71C7656EC7ab88b098defB751B7401B5f6d52A3");btn.innerText="✅ Copied!";soundAndHaptic('success');setTimeout(()=>btn.innerText="📋 Copy Address",2000);}
+
+function handleRequest(type){
+    if(type==='OTP'){const num=document.getElementById('user-whatsapp').value;if(num){soundAndHaptic('confirm');closeOverlay('reveal-modal');goWhatsApp(SUPPORT_WA,`Balance OTP Request\nWhatsApp: ${num}`);}else{alert("Please enter a valid WhatsApp number.");}}
+    else if(type==='Transfer'){const receiver=document.getElementById('receiver-username').value;if(receiver){soundAndHaptic('confirm');closeOverlay('send-details-modal');goWhatsApp(SUPPORT_WA,`Transfer Request to: ${receiver}`);}else{alert("Please fill in all receiver details.");}}
+}
+
+// ══ IMAGE SLIDER ══
 const sliderImages=[
     {url:"https://images.unsplash.com/photo-1604594849809-dfedff4f2b78?auto=format&fit=crop&w=800&q=80",tag:"🎉 Promo",label:"Limited Offer",text:"10% Cashback on every goMETRO ride"},
     {url:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80",tag:"🍔 New",label:"goFOOD",text:"Order hot meals delivered in 30 mins"},
@@ -866,7 +1009,6 @@ const sliderImages=[
     {url:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",tag:"💳 Premium",label:"goPremium",text:"Upgrade for zero transfer fees"}
 ];
 let currentSlide=0,sliderTimer=null;
-
 function initImageSlider(){
     const track=document.getElementById('insight-track');
     const dotsContainer=document.getElementById('slider-dots');
@@ -883,12 +1025,6 @@ function initImageSlider(){
 function startSliderTimer(){clearInterval(sliderTimer);sliderTimer=setInterval(()=>slideBy(1),4500);}
 function slideBy(dir){goToSlide((currentSlide+dir+sliderImages.length)%sliderImages.length);}
 function goToSlide(index){const old=document.getElementById(`slide-${currentSlide}`);if(old)old.classList.remove('active-slide');currentSlide=index;const nw=document.getElementById(`slide-${currentSlide}`);if(nw)nw.classList.add('active-slide');document.getElementById('insight-track').style.transform=`translateX(-${currentSlide*100}%)`;document.querySelectorAll('#slider-dots .dot').forEach((d,i)=>d.classList.toggle('active',i===currentSlide));startSliderTimer();}
-
-function closeModal(id){document.getElementById(id).style.display='none';}
-function handleRequest(type){
-    if(type==='OTP'){const num=document.getElementById('user-whatsapp').value;if(num){alert(`OTP Request sent to ${num} via WhatsApp!`);closeModal('reveal-modal');}else{alert("Please enter a valid WhatsApp number.");}}
-    else if(type==='Transfer'){const receiver=document.getElementById('receiver-username').value;if(receiver){alert(`Initiating transfer to ${receiver}...`);closeModal('send-details-modal');}else{alert("Please fill in all receiver details.");}}
-}
 </script>
 </body>
 </html>
