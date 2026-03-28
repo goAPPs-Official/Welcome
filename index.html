@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🚀goAPPs|DigitalSolution</title>
-    <meta name="description" content="goAPPs Nigeria — your all-in-one digital wallet and services platform">
+    <meta name="description" content="goAPPs — your all-in-one digital wallet and services platform">
     <meta name="theme-color" content="#00d28d">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -697,7 +697,7 @@
 <script>
 // ══ PWA ══
 (function injectPWA(){
-    const manifest={name:"goAPPs Nigeria",short_name:"goAPPs",description:"Your all-in-one Nigerian digital wallet & services",start_url:"./",display:"standalone",background_color:"#081f14",theme_color:"#00d28d",orientation:"portrait",icons:[{src:"https://via.placeholder.com/192/00d28d/062c1e?text=G",sizes:"192x192",type:"image/png"},{src:"https://via.placeholder.com/512/00d28d/062c1e?text=G",sizes:"512x512",type:"image/png",purpose:"maskable"}]};
+    const manifest={name:"goAPPs",short_name:"goAPPs",description:"Your all-in-one digital wallet & services",start_url:"./",display:"standalone",background_color:"#081f14",theme_color:"#00d28d",orientation:"portrait",icons:[{src:"https://via.placeholder.com/192/00d28d/062c1e?text=G",sizes:"192x192",type:"image/png"},{src:"https://via.placeholder.com/512/00d28d/062c1e?text=G",sizes:"512x512",type:"image/png",purpose:"maskable"}]};
     const blob=new Blob([JSON.stringify(manifest)],{type:"application/manifest+json"});
     document.getElementById('pwa-manifest-link').href=URL.createObjectURL(blob);
     const swCode=`const CACHE='goapps-v2';self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(['./'])));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{if(e.request.method!=='GET') return;e.respondWith(fetch(e.request).then(r=>{const cl=r.clone();caches.open(CACHE).then(c=>c.put(e.request,cl));return r;}).catch(()=>caches.match(e.request)));});`;
@@ -990,7 +990,7 @@ function toggleTheme(el){
 function inviteToGoApps(){
     soundAndHaptic('confirm');
     if(navigator.share){
-        navigator.share({title:'goAPPs Nigeria',text:'Join me on goAPPs — Nigeria\'s all-in-one digital wallet & services platform! 🚀',url:'https://goapps-official.github.io/Welcome-to-goAPPs/'}).catch(()=>{});
+        navigator.share({title:'goAPPs',text:'Join me on goAPPs\'s all-in-one digital wallet & services platform! 🚀',url:'https://goapps-official.github.io/Welcome-to-goAPPs/'}).catch(()=>{});
     } else {
         navigator.clipboard.writeText('https://goapps-official.github.io/Welcome-to-goAPPs/').then(()=>alert('goAPPs link copied! Share it with your friends.'));
     }
